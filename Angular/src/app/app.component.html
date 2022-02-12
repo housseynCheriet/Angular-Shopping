@@ -1,0 +1,230 @@
+
+
+<style>
+  :host {
+  background: linear-gradient(30deg, #f39c12 30%, #f1c40f);
+  display: block;
+}
+
+  :host *{
+  font-size: 22px;
+    font-weight: 900;
+    font-family: sans-serif;
+    text-align: center;
+}
+.chose{
+  margin: auto;
+    width: fit-content;
+    border: 3px solid green;
+    padding: 10px;
+    height: auto;
+    min-height: 400px;
+    min-width: -webkit-fill-available;
+    text-align: center;
+}
+select {
+  /* Reset Select */
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  background-color: #2c3e50;
+  background-image: none;
+  cursor: pointer;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: inline-block;
+  background-color: #2c3e50;
+  width: 20em;
+  height: 3em;
+  margin: 3px;
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: #34495e;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+/* Other styles*/
+body {
+  color: #fff;
+  background: var(--background-gradient);
+}
+h1 {
+  margin: 0 0 0.25em;
+}
+a {
+  font-weight: bold;
+  color: var(--gray);
+  text-decoration: none;
+  padding: .25em;
+  border-radius: .25em;
+  background: white;
+}
+select.selectLang {
+    width: auto;
+    background: blue;
+    border-radius: 3px;
+    float: right;
+}
+
+section {
+  display: inline-flex;
+  margin: 1em;
+  overflow: hidden;
+}
+div {
+  box-shadow: 0 0 6px 1px #f00;
+  margin: 6px;
+  
+}
+.overlay *{
+box-shadow: 0 ;
+}
+div.chose {
+  box-shadow: 0 0 6px 1px #f00;
+  margin: 6px;
+  
+}
+.imgProduct{
+    
+    display: block;
+    margin: 0px auto;
+    width: 240px;
+    height: 250px;
+  }
+
+.nameProduct{
+  text-align: center;
+    margin: 5px;
+}
+.hello{
+  font-size: 44px;
+    text-align: center;
+}
+/*********/
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #2e261aeb;
+}
+.overlay .overlayContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.loader {
+    width: 128px;
+    height: 128px;
+    position: relative;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader .inner {
+    width: 64px;
+    height: 64px;
+    border: 3px solid transparent;
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    -webkit-animation: spinInner 1s linear infinite;
+    animation: spinInner 1s linear infinite;
+}
+.overlay * {
+    box-shadow: none !important;
+}
+</style>
+
+<span class="form-inline">
+    <select class="selectLang" #selectedLang (change)="switchLanguage(selectedLang.value)">
+      <option *ngFor="let language of translate.getLangs()" [value]="language">{{ language }}</option>
+      
+    </select>
+  </span>
+<!--  -->
+<h1 class="hello">{{'Hello'|translate}} Bzns Monster</h1>
+<div class="chose">
+<div class="select">
+  <select #category1 (change)="switchMainCategory(category1.value)">
+      <option *ngFor="let item of mainCategory" [value]="item.id">{{item.name|translate }}</option>
+      
+    </select>
+</div>
+<div class="select">
+  <select #category2 (change)="switchSubCategory(category2.value)">
+      <option *ngFor="let item of subCategory" [value]="item.id">{{ item.name|translate }}</option>
+      
+    </select>
+
+  
+</div>
+<section>
+  
+
+  <div *ngFor="let product of products"><img class="imgProduct" src="{{product.imgPath}}">
+  <p class="nameProduct">{{ product.name|translate }}</p>
+</div>
+ </section>
+   
+</div>
+
+
+
+  <div [style.visibility]="visibility ? 'hidden' : 'visible' " class="overlay">
+  
+  <div class="overlayContent">
+    <div class="loader">
+      <svg version="1.1" id="L7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+ <path fill="#fff" d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
+  c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="2s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform>
+  </path>
+ <path fill="#fff" d="M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
+  c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="-360 50 50" repeatCount="indefinite"></animateTransform>
+  </path>
+ <path fill="#fff" d="M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
+  L82,35.7z">
+      <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="2s" from="0 50 50" to="360 50 50" repeatCount="indefinite"></animateTransform>
+  </path>
+</svg>
+    </div>
+    
+  </div>
+</div>
+
+

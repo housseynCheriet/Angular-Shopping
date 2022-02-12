@@ -1,4 +1,4 @@
-1. NodeJs
+1. cd NodeJs
 2. $ npm i
 3. cd AngularJs
 4. $ npm i    

@@ -23,8 +23,8 @@ export class AppComponent {
 
 
   constructor(public translate: TranslateService,public http: HttpClient) {
-    translate.addLangs(['tr','en','ar']);
-    translate.setDefaultLang('tr');
+    translate.addLangs(['en','tr','ar']);
+    translate.setDefaultLang('en');
     //translate.use('tr');
     this.http.get('http://localhost:3000/mainCategory?mainId='+this.mainId).subscribe((data : any) => {
 
